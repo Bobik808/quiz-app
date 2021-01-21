@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './components.css';
+import './components.scss';
 import { useForm } from 'react-hook-form';
 import { Redirect, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -43,7 +43,7 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
 
 
   let type = watch('type');
-  let isYesNo = type === 'Yes/No';
+  let isYesNo = type === 'yesNo';
 
 
   return (
@@ -56,9 +56,9 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
         <div className="edit-row type">
           <label htmlFor="type">Type:</label>
           <select name="type" id="type" ref={register}>
-            <option value="Yes/No" selected={isNew || card.type === 'Yes/No'}>Yes/No</option>
+            <option value="yesNo" selected={isNew || card.type === 'yesNo'}>yesNo</option>
             <option value="multipleChoice" selected={!isNew && card.type === 'multipleChoice'}>Multiple Choice</option>
-            <option value="writeAnswer" selected={!isNew && card.type === 'writeAnswer'}>Write Answer</option>
+            <option value="written" selected={!isNew && card.type === 'written'}>Write Answer</option>
           </select>
         </div>
         <div className="edit-row">

@@ -1,5 +1,5 @@
 import React from 'react';
-import './components.css';
+import './components.scss';
 
 import { Link } from 'react-router-dom';
 import {DeckProps} from '../types/types';

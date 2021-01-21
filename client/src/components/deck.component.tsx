@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './components.css';
+import './components.scss';
 import { useParams } from 'react-router-dom';
 import { DeckType, CardType, urlParams, Props } from '../types/types';
 import { Link } from 'react-router-dom';
