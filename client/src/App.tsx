@@ -51,6 +51,8 @@ function App() {
       .then((deckList: DeckType[]) => setDecks(deckList))
   },[])
 
+console.log('Decks', decks);
+
   return (
     <div className="App">
       <BrowserRouter>

@@ -6,7 +6,7 @@ import {DeckProps} from '../types/types';
 
 const deckList = ({decks}: DeckProps) => (
   <div className="deck-list">
-    <h2 className="table-header">Decks</h2>
+    <h2 className="table-header">Quizzes</h2>
     <div className="table">
         {decks.map((deck, index) =>
             <div className="table-row" key={index}>
@@ -30,7 +30,7 @@ const deckList = ({decks}: DeckProps) => (
         )}
     </div>
     <div className="create-new bottom-actions">
-      <button>Create new deck</button>
+      <button>Create new quizz</button>
     </div>
   </div>
 );

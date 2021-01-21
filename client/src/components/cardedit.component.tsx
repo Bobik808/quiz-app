@@ -11,7 +11,7 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
   const [deck, setDeck] = useState <DeckType | {}>({});
   const [card, setCard] = useState <CardType>({
     _id: cardID || 'new',
-    type: 'Yes/No',
+    type: 'yesNo',
     text: '',
     possibleAnswers: [''],
     correctAnswer: ''
@@ -21,7 +21,7 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
   const [isSubmitted, setSubmitted] = useState <boolean>(false);
 
   const onSubmit = async (data: CardSubmitType) => {
-    if (data.type === 'Yes/No') {
+    if (data.type === 'yesNo') {
       data.possibleAnswers = ['Yes', 'No'];
     } else if (typeof(data.possibleAnswers) === 'string') {
       data.possibleAnswers = data.possibleAnswers.split(',');
