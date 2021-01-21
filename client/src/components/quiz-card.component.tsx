@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './components.css'
+import './components.scss'
 import { CardType } from '../types/types';
-import AnswerButton from './answer-button.component'
+import AnswerButton from './answer-button.component';
+// import MultipleButton from './multiple-button';
 
 type props = {
   card: CardType;
@@ -12,31 +13,35 @@ type props = {
 }
 
 const QuizCard = ({ card, index, numCards, goToPrevious, goToNext }: props) => {
-  const [answerClicked, setAnswerClicked] = useState<boolean | undefined>(undefined)
+  const [answerClicked, setAnswerClicked] = useState<boolean>(false)
 
   useEffect(() => {
-    setAnswerClicked(false);
+    // setAnswerClicked(false);
   }, []);
 
+  console.log('CARD', card);
   return (
     <div className="quiz-card">
       <div className="question-text">
         <p>{card.text}</p>
       </div>
-      <div className="possible-answers">
-        {card.possibleAnswers.map((ans, i) =>
-          <AnswerButton
-            answer={ans}
-            isCorrect={ans === card.correctAnswer}
-            clicked={answerClicked}
-            key={i}
-            cardIndex={index}
-          />
-      )}
+
+
+      <div className="answers-wrapper">
+        <div className="answers-panel">
+          {card.possibleAnswers.map((answer, i) => {
+            return <div className="answer-option">
+              <p>{answer}</p>
+            </div>
+          })}
+        </div>
+
       </div>
+
+
       <div className="bottom-actions">
-        <button onClick={goToPrevious} disabled={index===0}>Previous</button>
-        <button onClick={goToNext} disabled={index===numCards-1}>Next</button>
+        <button onClick={goToPrevious} disabled={index === 0}>Previous</button>
+        <button onClick={goToNext} disabled={index === numCards - 1}>Next</button>
       </div>
     </div>
   )

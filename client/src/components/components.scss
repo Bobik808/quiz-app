@@ -10,7 +10,7 @@ button {
   margin-right: 3px;
   color: white;
   background-color: #172421;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   min-width: 50px;
   cursor: pointer;
@@ -29,7 +29,8 @@ button:disabled {
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid lightgrey;
-  align-items: center;;
+  align-items: center;
+  ;
 }
 
 .table .table-cell {
@@ -114,7 +115,7 @@ button:disabled {
   padding: 10px 5px 10px 5px;
   margin-top: 5px;
   margin-bottom: 10px;
-  border: 1px solid rgb(255,255,255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: #282c34;
   color: white;
 }
@@ -161,22 +162,34 @@ button:disabled {
 }
 
 .quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 70%;
 }
 
 .quiz-card .question-text {
+
+  align-items: center;
   font-size: 24px;
   margin: 4em;
   margin-bottom: 2em;
   min-height: 5em;
 }
 
-.quiz-card .possible-answers {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.answer-option {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.answers-wrapper{
+  width: 100%;
+  border: 3px solid green;
+
+}
+.answers-panel {
+  // width:
+  display: grid
 }
 
 .quiz-card .bottom-actions {
@@ -190,12 +203,14 @@ button:disabled {
   color: red;
   font-weight: bold;
   border: 3px solid red;
-  background-color: white;;
+  background-color: white;
+  ;
 }
 
 .clicked-correct {
   color: green;
   font-weight: bold;
   border: 3px solid green;
-  background-color: white;;
+  background-color: white;
+  ;
 }

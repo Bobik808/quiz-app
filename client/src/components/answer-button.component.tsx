@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './components.css'
+import './components.scss'
 
 type props = {
   answer: string
