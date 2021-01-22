@@ -4,6 +4,11 @@ import './components.scss';
 import { Link } from 'react-router-dom';
 import {DeckProps} from '../types/types';
 
+//! deck-list if rendered --- add property testID ---- get element by testID
+//! Check that everything that you expect to see is rendered
+//! test results of interactions (screen. ... getElementByText('..'))
+//! test aria selectors
+
 const deckList = ({decks}: DeckProps) => (
   <div className="deck-list">
     <h2 className="table-header">Decks</h2>
@@ -21,7 +26,7 @@ const deckList = ({decks}: DeckProps) => (
                 </Link>
               </div>
               <div className="table-cell actions">
-                <button>Rename</button>
+                <button>Rename</button >
               </div>
               <div className="table-cell actions">
                 <button>Delete</button>
