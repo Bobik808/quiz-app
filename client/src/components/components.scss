@@ -168,28 +168,67 @@ button:disabled {
   width: 70%;
 }
 
-.quiz-card .question-text {
 
-  align-items: center;
-  font-size: 24px;
-  margin: 4em;
-  margin-bottom: 2em;
-  min-height: 5em;
-}
 
 .answer-option {
-  margin-left: 50px;
-  margin-right: 50px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-auto-rows: 60px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
-.answers-wrapper{
+.answer-text {
+  grid-column: 1/1;
+}
+
+.answer-selector {
+  grid-column: 2/2;
+}
+
+.answers-wrapper {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  border: 3px solid green;
+  // border: 3px solid green;
 
 }
+
+@media only screen and (max-device-width: 374) and (min-device-height: 811) {
+  .quiz-card .question-text {
+
+    // align-items: center;
+    font-size: 24px;
+    margin: 4em;
+    margin-bottom: 2em;
+    min-height: 5em;
+  }
+
+}
+
+@media only screen and (min-device-width: 375) and (min-device-height: 812) {
+
+  .quiz-card {
+    width: 100%;
+  }
+
+  .quiz-card .question-text {
+
+    // align-items: center;
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 2em;
+    min-height: 5em;
+  }
+
+
+}
+
 .answers-panel {
-  // width:
-  display: grid
+  width: 500px;
+  // border: 3px solid blue;
+
+
 }
 
 .quiz-card .bottom-actions {

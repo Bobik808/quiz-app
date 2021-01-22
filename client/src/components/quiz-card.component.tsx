@@ -30,9 +30,11 @@ const QuizCard = ({ card, index, numCards, goToPrevious, goToNext }: props) => {
       <div className="answers-wrapper">
         <div className="answers-panel">
           {card.possibleAnswers.map((answer, i) => {
-            return <div className="answer-option">
-              <p>{answer}</p>
-            </div>
+            return (<div className="answer-option">
+              <p className="answer-text">{answer}</p>
+              <input type={`${card.type === 'yesno' ? 'radio' : 'checkbox'}`} className="answer-selector"></input>
+
+            </div>)
           })}
         </div>
 
