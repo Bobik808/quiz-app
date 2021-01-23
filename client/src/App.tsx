@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.scss';
+import './App.css';
 import Navbar from './components/navbar.component';
-import DeckList from './components/decklist.component';
+import DeckList from './components/decoklist.component';
 import Deck from './components/deck.component';
 import CardEdit from './components/cardedit.component';
 import Quiz from './components/quiz.component';
@@ -10,7 +10,7 @@ import Quiz from './components/quiz.component';
 import { DeckType, CardType } from './types/types';
 
 import ApiClient from './services/apiclient.service';
-
+//*
 function App() {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false)

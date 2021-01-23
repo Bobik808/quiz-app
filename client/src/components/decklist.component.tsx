@@ -9,7 +9,7 @@ import {DeckProps} from '../types/types';
 //! test results of interactions (screen. ... getElementByText('..'))
 //! test aria selectors
 
-const deckList = ({decks}: DeckProps) => (
+const DeckList = ({decks}: DeckProps) => (
   <div className="deck-list">
     <h2 className="table-header">Quizzes</h2>
     <div className="table">
@@ -40,4 +40,4 @@ const deckList = ({decks}: DeckProps) => (
   </div>
 );
 
-export default deckList;
+export default DeckList;
