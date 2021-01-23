@@ -5,7 +5,7 @@ import { DeckType, CardType, urlParams, Props } from '../types/types';
 import { Link } from 'react-router-dom';
 
 const Deck = ({ getDeckFromName, deleteCard, updateDecks, refresh }: Props) => {
-  const { deckName } = useParams<urlParams>();
+  const { deckName } = useParams<urlParams>(); 
   const [deck, setDeck] = useState<DeckType>({name: 'Deck loading...', cards:[]});
 
   useEffect(() => {

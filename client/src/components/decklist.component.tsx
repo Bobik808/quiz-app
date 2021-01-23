@@ -26,10 +26,10 @@ const DeckList = ({decks}: DeckProps) => (
                 </Link>
               </div>
               <div className="table-cell actions">
-                <button>Rename</button >
+                <button name='rename'>Rename</button >
               </div>
               <div className="table-cell actions">
-                <button>Delete</button>
+                <button name='delete'>Delete</button>
               </div>
             </div>
         )}
