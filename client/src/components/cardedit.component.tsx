@@ -3,9 +3,10 @@ import './components.scss';
 import { useForm } from 'react-hook-form';
 import { Redirect, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { DeckType, CardType, urlParams, Props, CardSubmitType} from '../types/types';
+import { DeckType, CardType, urlParams, Props, CardSubmitType } from '../types/types';
+import {getDeckFromName} from '../helpers/helpers'
 
-const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props) => {
+const CardEdit = ({ getCardFromID, editCard, updateDecks, decks}: Props) => {
   const {deckName, cardID} = useParams<urlParams>();
   const isNew = cardID === 'new';
   const [deck, setDeck] = useState <DeckType | {}>({});
@@ -33,7 +34,7 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
   }
 
   useEffect (() => {
-    const newDeck = getDeckFromName(deckName);
+    const newDeck = getDeckFromName(deckName, decks);
     setDeck(newDeck);
     if (cardID && newDeck && getCardFromID) {
       const newCard = getCardFromID(newDeck as DeckType, cardID);

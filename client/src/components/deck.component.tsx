@@ -5,11 +5,12 @@ import { DeckType, CardType, urlParams, Props } from '../types/types';
 import { Link } from 'react-router-dom';
 
 const Deck = ({ getDeckFromName, deleteCard, updateDecks, refresh }: Props) => {
-  const { deckName } = useParams<urlParams>(); 
+  const { deckName } = useParams<urlParams>();
   const [deck, setDeck] = useState<DeckType>({name: 'Deck loading...', cards:[]});
 
   useEffect(() => {
     const newDeck = getDeckFromName(deckName);
+
     setDeck(newDeck);
   }, []);
 
@@ -47,7 +48,8 @@ const Deck = ({ getDeckFromName, deleteCard, updateDecks, refresh }: Props) => {
   return (
     <div>
       {deck.name
-        ? <div className="deck">
+        ?
+        <div className="deck">
             <h2 className="table-header">{deck.name}</h2>
               <div className="table">
                 {displayCards()}
