@@ -13,6 +13,17 @@ exports.createDeck = async (req: Request, res: Response) => {
   }
 };
 
+exports.deleteDeck = async (req: Request, res: Response) => {
+  try {
+    const deckID = req.body;
+    await Deck.deleteOne({ _id: deckID });
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+    res.send('Could not delete document');
+  }
+}
+
 exports.getDecks = async (req: Request, res: Response) => {
   try {
     const decks = await Deck.find();

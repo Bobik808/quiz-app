@@ -28,6 +28,10 @@ const exports = {
   deleteCard: (card: CardType, deckName: string) => {
     console.log(`delete request made, card:${card}`);
     return fetchRequest('deleteCard', 'POST', { card, deckName });
+  },
+
+  editDeck: (deck: DeckType) => {
+    
   }
 }
 
