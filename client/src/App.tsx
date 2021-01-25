@@ -6,7 +6,7 @@ import DeckList from './components/decklist.component';
 import Deck from './components/deck.component';
 import CardEdit from './components/cardedit.component';
 import Quiz from './components/quiz.component';
-
+import { getDeckFromName } from './helpers/helpers'
 import { DeckType, CardType } from './types/types';
 
 import ApiClient from './services/apiclient.service';
@@ -62,6 +62,7 @@ console.log('Decks', decks);
             <Route path="/deck/:deckName/edit/:cardID">
               <CardEdit
                 getDeckFromName={getDeckFromName}
+                decks={decks}
                 getCardFromID={getCardFromID}
                 editCard={editCard}
                 updateDecks={updateDecks}
@@ -77,6 +78,7 @@ console.log('Decks', decks);
             <Route path="/deck/:deckName">
               {decks.length > 0
                 ? <Deck
+                    decks={decks}
                     getDeckFromName={getDeckFromName}
                     deleteCard={deleteCard}
                     updateDecks={updateDecks}

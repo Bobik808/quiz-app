@@ -29,5 +29,6 @@ export type Props = {
   getCardFromID?: (deck: DeckType, id: string) => CardType;
   editCard?: (card: CardType, deckName: string, isNew: boolean) => void;
   deleteCard?: (card: CardType, deckName: string) => void;
+  decks: DeckType[];
   refresh?: boolean;
 }
