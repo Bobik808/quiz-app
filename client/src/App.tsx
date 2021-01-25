@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.scss';
+import './App.css';
 import Navbar from './components/navbar.component';
 import DeckList from './components/decklist.component';
 import Deck from './components/deck.component';
 import CardEdit from './components/cardedit.component';
 import Quiz from './components/quiz.component';
-
+import * as helpers from '../src/helpers/helpers';
 import { DeckType, CardType } from './types/types';
 
 import ApiClient from './services/apiclient.service';
@@ -25,10 +25,10 @@ function App() {
     setRefresh(!refresh);
   }
 
-  const getDeckFromName = (deckName: string): DeckType => {
-    const [selectedDeck] = decks.filter(deck => deck.name === deckName);
-    return selectedDeck;
-  }
+  // const getDeckFromName = (deckName: string): DeckType => {
+  //   const [selectedDeck] = decks.filter(deck => deck.name === deckName);
+  //   return selectedDeck;
+  // }
 
   const getCardFromID = (deck: DeckType, id: string): CardType => {
     const [selectedCard] = deck.cards.filter(card => card._id === id);
@@ -61,7 +61,7 @@ console.log('Decks', decks);
           <Switch>
             <Route path="/deck/:deckName/edit/:cardID">
               <CardEdit
-                getDeckFromName={getDeckFromName}
+                getDeckFromName={helpers.getDeckFromName}
                 getCardFromID={getCardFromID}
                 editCard={editCard}
                 updateDecks={updateDecks}
@@ -70,14 +70,14 @@ console.log('Decks', decks);
             <Route path="/deck/:deckName/quiz">
               {decks.length > 0
                 ? <Quiz
-                  getDeckFromName={getDeckFromName}
+                  getDeckFromName={helpers.getDeckFromName}
                 />
                 : <p>Loading...</p>}
             </Route>
             <Route path="/deck/:deckName">
               {decks.length > 0
                 ? <Deck
-                    getDeckFromName={getDeckFromName}
+                    getDeckFromName={helpers.getDeckFromName}
                     deleteCard={deleteCard}
                     updateDecks={updateDecks}
                     refresh={refresh}

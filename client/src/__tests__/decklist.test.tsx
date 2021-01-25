@@ -41,7 +41,6 @@ const decks: DeckType[] = [
 
 
 describe('Decks', () => {
-let container: HTMLDivElement;
 test('renders decks when there are decks to display', () => {
   render(<MemoryRouter> <DeckList decks={decks} /> </MemoryRouter> );
   const linkElement = screen.getByText('Massive Deck');
@@ -57,6 +56,7 @@ test('renders decks when there are decks to display', () => {
 });
 
 }); 
+
 
 describe('deck via jest.mock', () => {
 test('display card titles within the deck', ()=>{
