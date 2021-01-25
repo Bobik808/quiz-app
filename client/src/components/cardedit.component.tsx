@@ -53,7 +53,7 @@ const CardEdit = ({ getCardFromID, editCard, updateDecks, decks}: Props) => {
         <h2>{deckName}</h2>
       </Link>
       <h3>{isNew ? 'Create new card' : 'Edit card'}</h3>
-      <form onSubmit={handleSubmit(onSubmit)} id="editForm">
+      <form onSubmit={() => handleSubmit(onSubmit)} id="editForm">
         <div className="edit-row type">
           <label htmlFor="type">Type:</label>
           <select name="type" id="type" ref={register}>

@@ -1,7 +1,7 @@
 import DeckList from '../components/decklist.component';
 import React from 'react';
 import * as ReactDOM from 'react-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { DeckProps, DeckType, CardType } from '../types/types'
 import Deck from '../components/deck.component';
 import { Props } from '../types/types';
@@ -65,8 +65,7 @@ describe('Decks', () => {
 
   });
 
-}); 
-
+});   
 
 
 describe('Deck', () => {
@@ -85,7 +84,7 @@ describe('Deck', () => {
     expect(screen.getByText(cards[1].text)).toBeInTheDocument();
 
   })  
-})
+}) 
 
 describe('Card', () => {
 
