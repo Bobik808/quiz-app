@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Navbar from './components/navbar.component';
 import DeckList from './components/decklist.component';
 import Deck from './components/deck.component';
 import CardEdit from './components/cardedit.component';
 import Quiz from './components/quiz.component';
-<<<<<<< HEAD
-import * as helpers from '../src/helpers/helpers';
-=======
 import { getDeckFromName } from './helpers/helpers'
->>>>>>> 287e146b50e856abe26572c7f2b8099d68b5ea80
 import { DeckType, CardType } from './types/types';
 
 import ApiClient from './services/apiclient.service';
@@ -29,10 +25,10 @@ function App() {
     setRefresh(!refresh);
   }
 
-  // const getDeckFromName = (deckName: string): DeckType => {
-  //   const [selectedDeck] = decks.filter(deck => deck.name === deckName);
-  //   return selectedDeck;
-  // }
+  const getDeckFromName = (deckName: string): DeckType => {
+    const [selectedDeck] = decks.filter(deck => deck.name === deckName);
+    return selectedDeck;
+  }
 
   const getCardFromID = (deck: DeckType, id: string): CardType => {
     const [selectedCard] = deck.cards.filter(card => card._id === id);
@@ -65,12 +61,8 @@ console.log('Decks', decks);
           <Switch>
             <Route path="/deck/:deckName/edit/:cardID">
               <CardEdit
-<<<<<<< HEAD
-                getDeckFromName={helpers.getDeckFromName}
-=======
                 getDeckFromName={getDeckFromName}
                 decks={decks}
->>>>>>> 287e146b50e856abe26572c7f2b8099d68b5ea80
                 getCardFromID={getCardFromID}
                 editCard={editCard}
                 updateDecks={updateDecks}
@@ -79,19 +71,15 @@ console.log('Decks', decks);
             <Route path="/deck/:deckName/quiz">
               {decks.length > 0
                 ? <Quiz
-                  getDeckFromName={helpers.getDeckFromName}
+                  getDeckFromName={getDeckFromName}
                 />
                 : <p>Loading...</p>}
             </Route>
             <Route path="/deck/:deckName">
               {decks.length > 0
                 ? <Deck
-<<<<<<< HEAD
-                    getDeckFromName={helpers.getDeckFromName}
-=======
                     decks={decks}
                     getDeckFromName={getDeckFromName}
->>>>>>> 287e146b50e856abe26572c7f2b8099d68b5ea80
                     deleteCard={deleteCard}
                     updateDecks={updateDecks}
                     refresh={refresh}
