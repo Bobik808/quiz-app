@@ -22,7 +22,7 @@ exports.deleteDeck = async (req: Request, res: Response) => {
     res.sendStatus(500);
     res.send('Could not delete document');
   }
-}
+};
 
 exports.getDecks = async (req: Request, res: Response) => {
   try {

@@ -3,6 +3,7 @@ import './components.scss';
 
 import { Link } from 'react-router-dom';
 import { DeckProps } from '../types/types';
+import deleteDeck from '../services/apiclient.service'
 
 //! deck-list if rendered --- add property testID ---- get element by testID
 //! Check that everything that you expect to see is rendered
@@ -16,7 +17,10 @@ const handleRename = () => {
 const DeckList = ({ decks }: DeckProps) => {
 
   const handleRename = () => {
-    
+
+  }
+
+  const handleDeleteDeck = () => {
   }
 
 
@@ -41,7 +45,7 @@ const DeckList = ({ decks }: DeckProps) => {
               <button onClick={handleRename} name='rename'>Rename</button >
             </div>
             <div className="table-cell actions">
-              <button name='delete'>Delete</button>
+              <button onClick={handleDeleteDeck} name='delete'>Delete</button>
             </div>
           </div>
         )}

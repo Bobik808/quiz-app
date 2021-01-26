@@ -31,15 +31,18 @@ const exports = {
   },
 
   editDeck: (deck: DeckType) => {
-    
+
+  },
+
+  deleteDeck: (deckName: string) => {
+    console.log(`delete request made, deck:${deckName}`);
+    return fetchRequest('deleteDeck', 'DELETE', {deckName});
   }
 }
 
 
 const fetchRequest = (url: string, method: string, body?: BodyType) => {
-  let init: FetchArgsType = {
-    method: method
-  }
+  let init: FetchArgsType = { method }
   if (method === 'POST') {
     init.headers = {'Content-Type': 'application/json'};
     init.body = JSON.stringify(body);
@@ -50,7 +53,7 @@ const fetchRequest = (url: string, method: string, body?: BodyType) => {
     .then(res => res.json())
     .catch((err) => {
       console.log(`${err.message} while fetching /${url}`)
-    })
+  })
 }
 
 export default exports;
