@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import Navbar from './components/navbar.component';
 import DeckList from './components/decklist.component';
 import Deck from './components/deck.component';
 import CardEdit from './components/cardedit.component';
 import Quiz from './components/quiz.component';
-import { getDeckFromName } from './helpers/helpers'
 import { DeckType, CardType } from './types/types';
-
+import AuthForm from './components/authForm';
 import ApiClient from './services/apiclient.service';
 //*
-function App() {
+function App () {
   const [decks, setDecks] = useState<DeckType[]>([]);
-  const [refresh, setRefresh] = useState<boolean>(false)
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('access token');
+    if (token) {
+      setUserAuthenticated(true);
+      ApiClient.getDecks(token)
+        .then((deckList: DeckType[]) => setDecks(deckList))
+    }
+  }, [])
 
   const updateDecks = async () => {
     // console.log('decks before:', decks);
     let newDecks = [];
-    newDecks = await ApiClient.getDecks();
+    newDecks = await ApiClient.getDecks(localStorage.getItem('access token'));
     // console.log('decks updated! newDecks:', newDecks);
     setDecks(newDecks);
     // console.log('decks after:', decks);
@@ -46,19 +55,19 @@ function App() {
 
   }
 
-  useEffect(() => {
-    ApiClient.getDecks()
-      .then((deckList: DeckType[]) => setDecks(deckList))
-  },[])
 
-console.log('Decks', decks);
+
+  console.log('Decks', decks);
 
   return (
     <div className="App">
       <BrowserRouter>
-          <Navbar/>
-          <div className="App-body">
+        <Navbar />
+        <div className="App-body">
           <Switch>
+            <Route path="/authenticate">
+              <AuthForm />
+            </Route>
             <Route path="/deck/:deckName/edit/:cardID">
               <CardEdit
                 getDeckFromName={getDeckFromName}
@@ -69,32 +78,35 @@ console.log('Decks', decks);
               />
             </Route>
             <Route path="/deck/:deckName/quiz">
-              {decks.length > 0
+              {decks && decks.length > 0
                 ? <Quiz
                   getDeckFromName={getDeckFromName}
                 />
                 : <p>Loading...</p>}
             </Route>
             <Route path="/deck/:deckName">
-              {decks.length > 0
+              {decks && decks.length > 0
                 ? <Deck
-                    decks={decks}
-                    getDeckFromName={getDeckFromName}
-                    deleteCard={deleteCard}
-                    updateDecks={updateDecks}
-                    refresh={refresh}
-                  />
+                  decks={decks}
+                  getDeckFromName={getDeckFromName}
+                  deleteCard={deleteCard}
+                  updateDecks={updateDecks}
+                  refresh={refresh}
+                />
                 : <p>Loading...</p>}
             </Route>
             <Route exact path="/">
-              {decks.length > 0
-              ? <DeckList
-                decks={decks}
-                />
-              : <p>Loading...</p>}
+              <DeckList decks={decks} />
+              {/* {
+                userAuthenticated && decks.length > 0
+                  ? <DeckList decks={decks} />
+                  : userAuthenticated && decks.length === 0
+                    ? <p>Loading...</p>
+                    : <Redirect to="/authenticate" />
+              } */}
             </Route>
           </Switch>
-          </div>
+        </div>
       </BrowserRouter>
     </div>
   );

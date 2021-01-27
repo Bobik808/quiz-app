@@ -4,10 +4,14 @@ import { port } from './config/config';
 import { router } from './router';
 import { connection } from './models/index.model';
 
+const corsConfig = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
 
 const app = express();
+app.use(cors(corsConfig));
 app.use(express.json());
-app.use(cors());
 app.use(router);
 
 

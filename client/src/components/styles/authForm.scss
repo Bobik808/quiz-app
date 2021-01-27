@@ -1,0 +1,29 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  // border: 3px solid red;
+  * {
+    margin: 5px 0;
+  }
+}
+
+.auth-panel {
+  width: 500px;
+  padding: 100px;
+  // border: 3px solid rgba(0, 255, 98, 0.603);
+}
+
+.auth-buttons {
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  // border: 3px solid rgba(187, 255, 0, 0.603);
+
+  button {
+    // margin: 20px;
+    width: 45%;
+  }
+}

@@ -22,6 +22,7 @@ exports.addManyCards = async (req: Request, res: Response) => {
 
 exports.createCard = async (req: Request, res: Response) => {
   try {
+    console.log('WOOW LOOK AT MY DECK', req.body);
     const { card, deckName } = req.body;
     const deck = await Deck.findOne({ name: deckName });
     deck.cards = [...deck.cards, card];
