@@ -18,7 +18,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const authHeaders = req.headers.authorization;
   console.log('AuthHeaders', authHeaders);
   // console.log('req.headers', req.headers);
-  // if (!authHeaders) return res.sendStatus(403);
+  if (!authHeaders) return res.sendStatus(403);
   const _id = await jwt.verify((<string>authHeaders).split(' ')[1], SECRET_KEY);
   console.log('_id', _id);
   try {

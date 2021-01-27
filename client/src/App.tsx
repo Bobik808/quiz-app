@@ -13,15 +13,17 @@ import ApiClient from './services/apiclient.service';
 function App () {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
+  const [userAuthenticated, setUserAuthenticated] = useState<boolean>(!!localStorage.getItem('access token') || false);
 
   useEffect(() => {
     const token = localStorage.getItem('access token');
     if (token) {
       setUserAuthenticated(true);
+      console.log('userAuthenticated', userAuthenticated)
       ApiClient.getDecks(token)
-        .then((deckList: DeckType[]) => setDecks(deckList))
+      .then((deckList: DeckType[]) => setDecks(deckList))
     }
+    console.log('userAuthenticated', userAuthenticated)
   }, [])
 
   const updateDecks = async () => {
@@ -96,14 +98,14 @@ function App () {
                 : <p>Loading...</p>}
             </Route>
             <Route exact path="/">
-              <DeckList decks={decks} />
-              {/* {
+              {/* <DeckList decks={decks} /> */}
+              {
                 userAuthenticated && decks.length > 0
                   ? <DeckList decks={decks} />
                   : userAuthenticated && decks.length === 0
                     ? <p>Loading...</p>
                     : <Redirect to="/authenticate" />
-              } */}
+              }
             </Route>
           </Switch>
         </div>
