@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import Navbar from './components/navbar.component';
@@ -9,6 +9,8 @@ import Quiz from './components/quiz.component';
 import { DeckType, CardType } from './types/types';
 import AuthForm from './components/authForm';
 import ApiClient from './services/apiclient.service';
+import {getSession} from './helpers/auth-pelpers'
+
 //*
 function App () {
   const [decks, setDecks] = useState<DeckType[]>([]);
@@ -21,7 +23,7 @@ function App () {
       setUserAuthenticated(true);
       console.log('userAuthenticated', userAuthenticated)
       ApiClient.getDecks(token)
-      .then((deckList: DeckType[]) => setDecks(deckList))
+        .then((deckList: DeckType[]) => setDecks(deckList))
     }
     console.log('userAuthenticated', userAuthenticated)
   }, [])
@@ -57,60 +59,71 @@ function App () {
 
   }
 
-
-
   console.log('Decks', decks);
+
+  const renderApp = () => {
+    return (
+      <div className="App-body">
+        <Switch>
+          <Route path="/deck/:deckName/edit/:cardID">
+            <CardEdit
+              getDeckFromName={getDeckFromName}
+              decks={decks}
+              getCardFromID={getCardFromID}
+              editCard={editCard}
+              updateDecks={updateDecks}
+            />
+          </Route>
+          <Route path="/deck/:deckName/quiz">
+            {decks && decks.length > 0
+              ? <Quiz
+                getDeckFromName={getDeckFromName}
+              />
+              : <p>Loading...</p>}
+          </Route>
+          <Route path="/deck/:deckName">
+            {decks && decks.length > 0
+              ? <Deck
+                decks={decks}
+                getDeckFromName={getDeckFromName}
+                deleteCard={deleteCard}
+                updateDecks={updateDecks}
+                refresh={refresh}
+              />
+              : <p>Loading...</p>}
+          </Route>
+          <Route exact path="/">
+            {/* <DeckList decks={decks} /> */}
+            {
+              userAuthenticated && decks.length > 0
+                ? <DeckList decks={decks} />
+                : userAuthenticated && decks.length === 0
+                  ? <p>Loading...</p>
+                  : <Redirect to="/authenticate" />
+            }
+          </Route>
+        </Switch>
+      </div>
+    )
+  }
+
 
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <div className="App-body">
-          <Switch>
-            <Route path="/authenticate">
-              <AuthForm />
-            </Route>
-            <Route path="/deck/:deckName/edit/:cardID">
-              <CardEdit
-                getDeckFromName={getDeckFromName}
-                decks={decks}
-                getCardFromID={getCardFromID}
-                editCard={editCard}
-                updateDecks={updateDecks}
-              />
-            </Route>
-            <Route path="/deck/:deckName/quiz">
-              {decks && decks.length > 0
-                ? <Quiz
-                  getDeckFromName={getDeckFromName}
-                />
-                : <p>Loading...</p>}
-            </Route>
-            <Route path="/deck/:deckName">
-              {decks && decks.length > 0
-                ? <Deck
-                  decks={decks}
-                  getDeckFromName={getDeckFromName}
-                  deleteCard={deleteCard}
-                  updateDecks={updateDecks}
-                  refresh={refresh}
-                />
-                : <p>Loading...</p>}
-            </Route>
-            <Route exact path="/">
-              {/* <DeckList decks={decks} /> */}
-              {
-                userAuthenticated && decks.length > 0
-                  ? <DeckList decks={decks} />
-                  : userAuthenticated && decks.length === 0
-                    ? <p>Loading...</p>
-                    : <Redirect to="/authenticate" />
-              }
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </div>
+        <Route path="/" render={(): any => {
+          return getSession()
+            ? renderApp()
+            : <Redirect to="/authenticate">
+            </Redirect>
+        }}></Route>
+
+        <Route path="/authenticate">
+          <AuthForm />
+        </Route>
+      </BrowserRouter >
+    </div >
   );
 }
 

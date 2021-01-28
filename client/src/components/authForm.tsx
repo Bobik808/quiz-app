@@ -1,6 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import './styles/authForm.scss'
 import ApiService from '../services/apiclient.service'
+import Cookie from 'js-cookie';
 
 const AuthForm = () => {
   const initialLogin: { email: string, password: string } = {
@@ -41,6 +42,7 @@ const AuthForm = () => {
       alert('Wrong password you prick!');
     } else {
       localStorage.setItem('access token', data.accessToken);
+      Cookie.set('__session', data.accessToken);
     }
     console.log('Submit Clicked', authState);
   }
